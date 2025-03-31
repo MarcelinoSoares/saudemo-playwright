@@ -31,10 +31,14 @@ jobs:
       - name: Run Playwright tests
         run: npx playwright test
 
+      - name: Generate Timestamp
+        id: timestamp
+        run: echo "::set-output name=time::$(date +'%Y%m%d%H%M%S')"
+
       - name: Upload Playwright Report
         if: always() # Garante que o relatório será enviado mesmo em caso de falha
         uses: actions/upload-artifact@v4
         with:
-          name: playwright-report-${{ github.run_id }} # Adiciona um identificador único
+          name: playwright-report-${{ github.run_id }}-${{ github.run_number }}-${{ github.job }}-${{ steps.timestamp.outputs.time }}
           path: playwright-report/
           retention-days: 30
