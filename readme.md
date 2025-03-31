@@ -26,10 +26,11 @@ Este projeto utiliza o [Playwright](https://playwright.dev/) para automação de
 
 ## 📄 Estrutura do Projeto
 ```
-📂 projeto
+📂 sauce-playwright
  ┣ 📂 tests/           # Arquivos de teste Playwright
  ┣ 📂 configs/         # Configurações do Playwright
  ┣ 📂 reports/         # Relatórios de teste
+ ┣ 📂 utils/           # Funções utilitárias para os testes
  ┣ 📄 playwright.config.ts  # Configuração principal
  ┣ 📄 package.json     # Dependências do projeto
  ┗ 📄 README.md        # Documentação do projeto
@@ -46,8 +47,23 @@ export default defineConfig({
     viewport: { width: 1280, height: 720 },
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
+    baseURL: 'http://localhost:3000', // URL base para os testes
   },
   reporter: [['html', { outputFolder: 'reports' }]],
+  projects: [
+    {
+      name: 'Chromium',
+      use: { browserName: 'chromium' },
+    },
+    {
+      name: 'Firefox',
+      use: { browserName: 'firefox' },
+    },
+    {
+      name: 'Webkit',
+      use: { browserName: 'webkit' },
+    },
+  ],
 });
 ```
 
@@ -69,6 +85,7 @@ export default defineConfig({
 - Use `data-testid` para identificar elementos.
 - Escreva testes modulares e reutilizáveis.
 - Utilize `beforeEach` e `afterEach` para setup e teardown.
+- Configure variáveis de ambiente para dados sensíveis.
 
 ## 📌 Contribuindo
 Contribuições são bem-vindas! Siga o padrão de código e abra um PR.

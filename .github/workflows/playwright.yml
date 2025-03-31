@@ -33,12 +33,14 @@ jobs:
 
       - name: Generate Timestamp
         id: timestamp
-        run: echo "time=$(date +'%Y%m%d%H%M%S')" >> $GITHUB_ENV
+        run: |
+          echo "time=$(date +'%Y%m%d%H%M%S')" >> $GITHUB_ENV
+          echo "time=$(date +'%Y%m%d%H%M%S')" >> $GITHUB_OUTPUT
 
       - name: Upload Playwright Report
         if: always() # Garante que o relatório será enviado mesmo em caso de falha
         uses: actions/upload-artifact@v4
         with:
-          name: playwright-report-${{ github.run_id }}-${{ github.run_number }}-${{ github.job }}-${{ env.time }}
+          name: playwright-report-${{ github.run_id }}-${{ github.run_number }}-${{ github.job }}-${{ steps.timestamp.outputs.time }}
           path: playwright-report/
           retention-days: 30
