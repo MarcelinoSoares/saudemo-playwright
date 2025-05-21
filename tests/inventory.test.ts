@@ -50,4 +50,17 @@ test('should verify all products descriptions on inventory page', async ({}) => 
 test('should verify all products prices on inventory page', async ({}) => {
 	await inventoryPage.verifyItemPrices(Object.values(products));
 });
+
+test('should search for items and verify search results', async ({}) => {
+	const existingItem = products.backpack.name;
+	const nonExistingItem = 'Non-existent Product';
+
+	// Search for an existing item
+	await inventoryPage.searchItem(existingItem);
+	await inventoryPage.assertItemInSearchResults(existingItem);
+
+	// Search for a non-existing item
+	await inventoryPage.searchItem(nonExistingItem);
+	await inventoryPage.assertItemNotInSearchResults(nonExistingItem);
+});
 });

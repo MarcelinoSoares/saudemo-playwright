@@ -1,9 +1,22 @@
+/**
+ * Product data for the Sauce Demo application.
+ * 
+ * This object contains information about all products available in the Sauce Demo store.
+ * Each product has a consistent set of properties:
+ * - id: The product ID (string)
+ * - name: The product name (string)
+ * - price: The product price (number)
+ * - description: The product description (string)
+ * - selector: A selector that can be used to locate the product in the UI (string)
+ */
 export const products = {
 	backpack: {
+		id: '4',
 		name: 'Sauce Labs Backpack',
+		price: 29.99,
 		description:
 			'carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.',
-		price: 29.99,
+		selector: 'text=Sauce Labs Backpack',
 	},
 	bikeLight: {
 		id: '0',
