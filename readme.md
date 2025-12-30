@@ -1,170 +1,152 @@
-# 🎭 Playwright Test Automation para Sauce Demo
+# 🎭 Sauce Demo Playwright Automation
 
-## 📌 Introdução
-Este projeto utiliza o [Playwright](https://playwright.dev/) para automação de testes end-to-end da aplicação [Sauce Demo](https://www.saucedemo.com/), garantindo qualidade e confiabilidade. O Sauce Demo é uma aplicação web de demonstração que simula uma loja online, permitindo testar diversos cenários de e-commerce como login, navegação de produtos, adição ao carrinho e checkout.
+![Playwright](https://img.shields.io/badge/Playwright-45ba4b?style=for-the-badge&logo=Playwright&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)
 
-## 🏗️ Arquitetura do Projeto
-Este projeto implementa o **Padrão Page Object Model (POM)**, uma prática recomendada para automação de testes que:
+## 📌 Introduction
 
-- **Separa a lógica de teste da lógica de interação com a página**: Cada página da aplicação tem sua própria classe que encapsula os seletores e métodos para interagir com ela.
-- **Melhora a manutenibilidade**: Alterações na interface da aplicação afetam apenas o page object correspondente, não os testes.
-- **Promove a reutilização de código**: Os métodos de interação com a página podem ser reutilizados em vários testes.
-- **Torna os testes mais legíveis**: Os testes usam métodos com nomes significativos que descrevem ações de alto nível.
+This project utilizes [Playwright](https://playwright.dev/) for end-to-end test automation of the [Sauce Demo](https://www.saucedemo.com/) application. It ensures quality and reliability by simulating user interactions in a realistic e-commerce environment, covering scenarios like login, product navigation, cart management, and checkout.
 
-### Estrutura dos Page Objects
-- **BasePage**: Classe base que fornece métodos comuns para todos os page objects
-- **LoginPage**: Interage com a página de login
-- **InventoryPage**: Interage com a página de inventário (lista de produtos)
-- **CartPage**: Interage com a página do carrinho de compras
-- **CheckoutPage**: Interage com as páginas do processo de checkout
+## 🏗️ Project Architecture
 
-## 🛠️ Tecnologias Utilizadas
-- [Node.js](https://nodejs.org/)
-- [Playwright](https://playwright.dev/)
-- [Jest](https://jestjs.io/) (opcional)
-- [TypeScript](https://www.typescriptlang.org/) (opcional)
+This project follows the **Page Object Model (POM)** design pattern, which:
 
-## 🚀 Instalação
-1. Clone o repositório:
+- **Separates test logic from page interaction logic**: Each application page has a dedicated class encapsulating selectors and interaction methods.
+- **Enhances maintainability**: UI changes only require updates in the corresponding page object, not the tests.
+- **Promotes code reuse**: Interaction methods are reusable across multiple tests.
+- **Improves readability**: Tests use meaningful method names describing high-level actions.
+
+### Page Objects Structure
+- **`BasePage`**: Shared methods and utilities for all page objects.
+- **`LoginPage`**: Interaction with the login screen.
+- **`InventoryPage`**: Handling the product list and filtering.
+- **`CartPage`**: Managing the shopping cart.
+- **`CheckoutPage`**: Processing the checkout flow.
+
+## 🛠️ Tech Stack
+
+- **[Node.js](https://nodejs.org/)**: Runtime environment.
+- **[Playwright](https://playwright.dev/)**: Browser automation framework.
+- **[TypeScript](https://www.typescriptlang.org/)**: Typed superset of JavaScript for better tooling and error checking.
+- **[Jest](https://jestjs.io/)** (Optional): Testing framework integration.
+
+## 🚀 Installation
+
+1. **Clone the repository:**
    ```sh
-   git clone https://github.com/seu-usuario/seu-repo.git
-   cd seu-repo
+   git clone https://github.com/your-username/sauce-playwright.git
+   cd sauce-playwright
    ```
-2. Instale as dependências:
+
+2. **Install dependencies:**
    ```sh
    npm install
    ```
-3. Instale os navegadores necessários:
+
+3. **Install Playwright browsers:**
    ```sh
    npx playwright install
    ```
 
-## 📄 Estrutura do Projeto
+## 📄 Project Structure
+
 ```
 📂 sauce-playwright
- ┣ 📂 tests/           # Arquivos de teste Playwright
- ┣ 📂 configs/         # Configurações do Playwright
- ┣ 📂 reports/         # Relatórios de teste
- ┣ 📂 utils/           # Funções utilitárias para os testes
- ┣ 📄 playwright.config.ts  # Configuração principal
- ┣ 📄 package.json     # Dependências do projeto
- ┗ 📄 README.md        # Documentação do projeto
+ ┣ 📂 .github/workflows # GitHub Actions CI/CD configurations
+ ┣ 📂 configs/          # Playwright environment configurations
+ ┣ 📂 fixtures/         # Custom Playwright fixtures for test isolation
+ ┣ 📂 pages/            # Page Object Model classes
+ ┣ 📂 reports/          # Test execution reports
+ ┣ 📂 tests/            # Playwright test specifications (*.spec.ts)
+ ┣ 📂 utils/            # Helper functions and shared utilities
+ ┣ 📄 .env.example      # Example environment variables file
+ ┣ 📄 playwright.config.ts # Main Playwright configuration
+ ┣ 📄 package.json      # Project dependencies and scripts
+ ┗ 📄 README.md         # Project documentation
 ```
 
-## 📝 Configuração do Playwright
-Exemplo de `playwright.config.ts`:
-```ts
-import { defineConfig } from '@playwright/test';
+## 📜 Available Scripts
 
-export default defineConfig({
-  use: {
-    headless: true,
-    viewport: { width: 1280, height: 720 },
-    screenshot: 'only-on-failure',
-    video: 'retain-on-failure',
-    baseURL: 'http://localhost:3000', // URL base para os testes
-  },
-  reporter: [['html', { outputFolder: 'reports' }]],
-  projects: [
-    {
-      name: 'Chromium',
-      use: { browserName: 'chromium' },
-    },
-    {
-      name: 'Firefox',
-      use: { browserName: 'firefox' },
-    },
-    {
-      name: 'Webkit',
-      use: { browserName: 'webkit' },
-    },
-  ],
-});
-```
+| Script | Description |
+| :--- | :--- |
+| `npm test` | Runs all Playwright tests. |
+| `npm run test:ui` | Opens the interactive Playwright UI mode. |
+| `npm run test:headless` | Runs tests in **headed** mode (visible browser). |
+| `npm run test:debug` | Runs tests in debug mode (step-by-step execution). |
+| `npm run test:report` | Generates and opens the HTML test report. |
+| `npm run check` | Checks for code linting and formatting issues (gts). |
+| `npm run fix` | Automatically fixes simple linting and formatting issues. |
+| `npm run compile` | Compiles TypeScript code. |
 
-## 🧪 Executando os Testes
-- Rodar todos os testes:
+## ⚙️ Configuration & Environment Variables
+
+This project may require environment variables for sensitive data or configuration.
+
+1. Create a `.env` file in the root directory (copy from `.env.example` if available).
+2. Define the following variables:
+
+| Variable | Description |
+| :--- | :--- |
+| `SLACK_WEBHOOK_URL` | Webhook URL to send test failure notifications to Slack. |
+| `BASE_URL` | (Optional) Base URL for the application under test. |
+
+## 🧪 Running Tests
+
+- **Run all tests:**
   ```sh
   npx playwright test
   ```
-- Rodar testes específicos:
+
+- **Run a specific test file:**
   ```sh
-  npx playwright test tests/exemplo.spec.ts
+  npx playwright test tests/example.spec.ts
   ```
-- Gerar relatório:
+
+- **View the test report:**
   ```sh
   npx playwright show-report
   ```
 
-## 🏗️ Boas Práticas
+## 🏗️ Best Practices
 
-### Seletores e Elementos
-- Use `data-testid` para identificar elementos sempre que possível.
-- Defina seletores como propriedades privadas no topo da classe page object.
-- Use seletores CSS ou seletores de texto que sejam resilientes a mudanças na estrutura da página.
+### Selectors & Elements
+- prioritize `data-testid` or stable attributes.
+- Encapsulate selectors as private properties in Page Objects.
+- Use robust CSS or text selectors.
 
-### Estrutura de Testes
-- Escreva testes modulares e reutilizáveis.
-- Utilize `beforeEach` e `afterEach` para setup e teardown.
-- Configure variáveis de ambiente para dados sensíveis.
-- Siga o padrão AAA (Arrange, Act, Assert) para estruturar seus testes.
+### Test Structure
+- Follow **AAA (Arrange, Act, Assert)** pattern.
+- meaningful test names.
+- Use `beforeEach` / `afterEach` for setup/teardown.
 
-### Documentação
-- Documente todas as classes com descrições detalhadas e exemplos de uso.
-- Documente todos os métodos explicando o que fazem, seus parâmetros e valores de retorno.
-- Inclua exemplos de uso para métodos complexos ou que tenham múltiplos casos de uso.
-- Mantenha a documentação atualizada quando o código for modificado.
-- Use JSDoc para documentar classes, métodos, parâmetros e tipos de retorno.
+### Documentation
+- Use JSDoc for classes and methods.
+- Keep README and code comments updated.
 
-### Padrão Page Object
-- Estenda a classe BasePage para todos os page objects.
-- Implemente métodos que representem ações de alto nível que um usuário pode realizar.
-- Mantenha a lógica de interação com a página dentro dos page objects, não nos testes.
-- Retorne outros page objects quando a ação navega para outra página.
+## 🔄 CI/CD (Continuous Integration & Delivery)
 
-## 🔄 CI/CD (Integração e Entrega Contínua)
+This project uses **GitHub Actions** for automated testing.
 
-Este projeto utiliza GitHub Actions para automação de testes e integração contínua. O pipeline de CI/CD inclui:
+### Referece Workflow
+Located in `.github/workflows/playwright.yml`.
 
-### 🔄 Execução Automática de Testes
+### Triggers
+- Pushes to `main` / `master`.
+- Pull Requests to `main` / `master`.
+- Scheduled (Weekly).
+- Manual dispatch.
 
-Os testes são executados automaticamente nas seguintes situações:
-- Em cada push para as branches `main` ou `master`
-- Em cada pull request para as branches `main` ou `master`
-- Semanalmente (toda segunda-feira à meia-noite)
-- Manualmente através da opção "workflow_dispatch" no GitHub
+### Features
+- **Multi-version Node.js testing** (16, 18, LTS).
+- **HTML Reports** published to GitHub Pages / Artifacts.
+- **Slack Notifications** on failure.
 
-### 🧪 Matriz de Testes
+## 🤝 Contribution
 
-Os testes são executados em múltiplas versões do Node.js:
-- Node.js 16
-- Node.js 18
-- Última versão LTS do Node.js
+Contributions are welcome! Please follow the code style (`npm run check`) and submit a Pull Request.
 
-### 📊 Relatórios de Teste
+## 📜 License
 
-- **Relatórios HTML**: Gerados automaticamente após cada execução de teste
-- **Artefatos**: Os relatórios são salvos como artefatos no GitHub Actions
-- **GitHub Pages**: Os relatórios são publicados no GitHub Pages para fácil acesso
-
-### 📢 Notificações
-
-- **Slack**: Notificações são enviadas para o Slack quando os testes falham
-- As notificações incluem informações sobre o workflow, job, branch e um link para a execução
-
-### ⚙️ Configuração
-
-Para configurar as notificações do Slack, adicione o seguinte segredo no seu repositório GitHub:
-- `SLACK_WEBHOOK_URL`: URL do webhook do Slack para receber notificações
-
-### 📋 Arquivo de Workflow
-
-O arquivo de workflow está localizado em `.github/workflows/playwright.yml` e pode ser personalizado conforme necessário.
-
-## 📌 Contribuindo
-Contribuições são bem-vindas! Siga o padrão de código e abra um PR.
-
-## 📜 Licença
 MIT License
-
----
