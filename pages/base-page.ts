@@ -7,10 +7,6 @@ export class BasePage {
     await this.page.goto(url);
   }
 
-  getLocator(selector: string): Locator {
-    return this.page.locator(selector);
-  }
-
   async assertUrlContains(urlSubstring: string): Promise<void> {
     await expect(this.page).toHaveURL(new RegExp(urlSubstring));
   }
