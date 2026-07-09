@@ -10,8 +10,7 @@ export const environments: Record<string, Environment> = {
   },
   staging: {
     name: 'staging',
-    baseURL:
-      process.env.STAGING_BASE_URL ?? 'https://www.saucedemo.com',
+    baseURL: process.env.STAGING_BASE_URL ?? 'https://www.saucedemo.com',
   },
 };
 

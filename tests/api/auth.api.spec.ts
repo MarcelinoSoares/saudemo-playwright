@@ -43,7 +43,10 @@ test.describe('Auth - HTTP Layer', () => {
   test('successful login navigates to inventory', async ({page}) => {
     const loginPage = new LoginPage(page);
     await loginPage.navigate();
-    await loginPage.login(users.standardUser.username, users.standardUser.password);
+    await loginPage.login(
+      users.standardUser.username,
+      users.standardUser.password,
+    );
     await loginPage.assertLoginSuccess();
   });
 });
