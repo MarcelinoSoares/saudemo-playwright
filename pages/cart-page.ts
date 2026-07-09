@@ -1,5 +1,6 @@
 import {Page, Locator, expect} from '@playwright/test';
 import {BasePage} from './base-page';
+import {Product} from '../fixtures/products';
 
 export class CartPage extends BasePage {
   readonly title: Locator;
@@ -67,9 +68,8 @@ export class CartPage extends BasePage {
     );
   }
 
-  async removeItem(itemName: string): Promise<void> {
-    const removeId = itemName.toLowerCase().replace(/\s+/g, '-');
-    await this.page.locator(`[data-test="remove-${removeId}"]`).click();
+  async removeItem(product: Product): Promise<void> {
+    await this.page.locator(`[data-test="${product.removeId}"]`).click();
   }
 
   async proceedToCheckout(): Promise<void> {

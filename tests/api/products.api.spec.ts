@@ -47,14 +47,6 @@ test.describe('Products - Network Layer', () => {
   });
 
   test('intercepted page shows correct product count', async ({page}) => {
-    const productNames: string[] = [];
-
-    page.on('response', async response => {
-      if (response.url().includes('inventory')) {
-        productNames.push(response.url());
-      }
-    });
-
     await page.reload();
     const items = page.locator('.inventory_item_name');
     await expect(items).toHaveCount(Object.keys(products).length);

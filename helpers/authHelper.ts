@@ -1,5 +1,5 @@
 import {Page} from '@playwright/test';
-import {urls} from '../config/urls';
+import {LoginPage} from '../pages/login-page';
 import {users} from '../fixtures/users';
 
 export async function loginAs(
@@ -7,11 +7,10 @@ export async function loginAs(
   username: string,
   password: string,
 ): Promise<void> {
-  await page.goto(urls.login);
-  await page.fill('#user-name', username);
-  await page.fill('#password', password);
-  await page.click('#login-button');
-  await page.waitForURL(/inventory/);
+  const loginPage = new LoginPage(page);
+  await loginPage.navigate();
+  await loginPage.login(username, password);
+  await loginPage.assertLoginSuccess();
 }
 
 export async function loginAsStandardUser(page: Page): Promise<void> {
