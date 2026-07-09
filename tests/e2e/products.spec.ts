@@ -1,6 +1,6 @@
 import {test} from '@playwright/test';
 import {InventoryPage} from '../../pages/inventory-page';
-import {loginAsStandardUser} from '../../helpers/authHelper';
+import {loginAsStandardUser} from '../../helpers/auth-helper';
 import {
   products,
   sortExpectations,
@@ -15,39 +15,39 @@ test.describe('Products Page', () => {
     await loginAsStandardUser(page);
   });
 
-  test('should display inventory page', async () => {
+  test('@smoke should display inventory page', async () => {
     await inventoryPage.assertInventoryPage();
   });
 
-  test('should display all 6 products', async () => {
+  test('@smoke should display all 6 products', async () => {
     await inventoryPage.verifyProductCount(TOTAL_PRODUCT_COUNT);
   });
 
-  test('should sort products A to Z', async () => {
+  test('@regression should sort products A to Z', async () => {
     await inventoryPage.selectProductSortOption('Name (A to Z)');
     await inventoryPage.verifyProductNamesOrder(sortExpectations.nameAtoZ.all);
   });
 
-  test('should sort products Z to A', async () => {
+  test('@regression should sort products Z to A', async () => {
     await inventoryPage.selectProductSortOption('Name (Z to A)');
     await inventoryPage.verifyProductNamesOrder(sortExpectations.nameZtoA.all);
   });
 
-  test('should sort products by price low to high', async () => {
+  test('@regression should sort products by price low to high', async () => {
     await inventoryPage.selectProductSortOption('Price (low to high)');
     await inventoryPage.verifyFirstItemPrice(
       sortExpectations.priceLowToHigh.firstPrice,
     );
   });
 
-  test('should sort products by price high to low', async () => {
+  test('@regression should sort products by price high to low', async () => {
     await inventoryPage.selectProductSortOption('Price (high to low)');
     await inventoryPage.verifyFirstItemPrice(
       sortExpectations.priceHighToLow.firstPrice,
     );
   });
 
-  test('should display product details correctly', async () => {
+  test('@regression should display product details correctly', async () => {
     const item = products.backpack;
 
     await inventoryPage.searchItemExistsInInventory(item.name);
@@ -61,11 +61,11 @@ test.describe('Products Page', () => {
     await inventoryPage.assertInventoryPage();
   });
 
-  test('should verify all products descriptions on inventory page', async () => {
+  test('@regression should verify all products descriptions on inventory page', async () => {
     await inventoryPage.verifyItemDescriptions(Object.values(products));
   });
 
-  test('should verify all products prices on inventory page', async () => {
+  test('@regression should verify all products prices on inventory page', async () => {
     await inventoryPage.verifyItemPrices(Object.values(products));
   });
 });

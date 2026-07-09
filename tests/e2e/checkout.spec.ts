@@ -2,7 +2,7 @@ import {test} from '@playwright/test';
 import {CheckoutPage} from '../../pages/checkout-page';
 import {CartPage} from '../../pages/cart-page';
 import {InventoryPage} from '../../pages/inventory-page';
-import {loginAsStandardUser} from '../../helpers/authHelper';
+import {loginAsStandardUser} from '../../helpers/auth-helper';
 import {products} from '../../fixtures/products';
 import {persona} from '../../fixtures/personas';
 
@@ -21,11 +21,11 @@ test.describe('Checkout Page', () => {
     await cartPage.proceedToCheckout();
   });
 
-  test('should display checkout page', async () => {
+  test('@smoke should display checkout page', async () => {
     await checkoutPage.assertCheckoutPage();
   });
 
-  test('should fill checkout info and reach overview', async () => {
+  test('@smoke should fill checkout info and reach overview', async () => {
     const user = persona.validUser;
 
     await checkoutPage.fillCheckoutInfo(
@@ -36,7 +36,7 @@ test.describe('Checkout Page', () => {
     await checkoutPage.assertOverviewPage();
   });
 
-  test('should display error for missing first name', async () => {
+  test('@regression should display error for missing first name', async () => {
     const user = persona.withoutFirstNameUser;
 
     await checkoutPage.fillCheckoutInfo(
@@ -47,7 +47,7 @@ test.describe('Checkout Page', () => {
     await checkoutPage.assertErrorMessage('Error: First Name is required');
   });
 
-  test('should display error for missing last name', async () => {
+  test('@regression should display error for missing last name', async () => {
     const user = persona.withoutLastNameUser;
 
     await checkoutPage.fillCheckoutInfo(
@@ -58,7 +58,7 @@ test.describe('Checkout Page', () => {
     await checkoutPage.assertErrorMessage('Error: Last Name is required');
   });
 
-  test('should display error for missing zip code', async () => {
+  test('@regression should display error for missing zip code', async () => {
     const user = persona.withoutZipCodeUser;
 
     await checkoutPage.fillCheckoutInfo(
@@ -69,7 +69,7 @@ test.describe('Checkout Page', () => {
     await checkoutPage.assertErrorMessage('Error: Postal Code is required');
   });
 
-  test('should display error when all fields are empty', async () => {
+  test('@regression should display error when all fields are empty', async () => {
     const user = persona.withoutAllUser;
 
     await checkoutPage.fillCheckoutInfo(
@@ -80,7 +80,7 @@ test.describe('Checkout Page', () => {
     await checkoutPage.assertErrorMessage('Error: First Name is required');
   });
 
-  test('should display order summary with correct item, price and quantity', async () => {
+  test('@regression should display order summary with correct item, price and quantity', async () => {
     const user = persona.validUser;
     const item = products.backpack;
 
@@ -92,7 +92,7 @@ test.describe('Checkout Page', () => {
     await checkoutPage.assertOrderSummary(item.name, item.price, '1');
   });
 
-  test('should display tax and total on overview page', async () => {
+  test('@regression should display tax and total on overview page', async () => {
     const user = persona.validUser;
 
     await checkoutPage.fillCheckoutInfo(
@@ -104,12 +104,12 @@ test.describe('Checkout Page', () => {
     await checkoutPage.assertTotalDisplayed();
   });
 
-  test('should cancel from checkout step 1 and return to cart', async () => {
+  test('@regression should cancel from checkout step 1 and return to cart', async () => {
     await checkoutPage.cancelCheckout();
     await cartPage.assertCartPage();
   });
 
-  test('should cancel from overview and return to inventory', async () => {
+  test('@regression should cancel from overview and return to inventory', async () => {
     const user = persona.validUser;
 
     await checkoutPage.fillCheckoutInfo(
@@ -122,7 +122,7 @@ test.describe('Checkout Page', () => {
     await inventoryPage.assertInventoryPage();
   });
 
-  test('should complete checkout successfully', async () => {
+  test('@smoke should complete checkout successfully', async () => {
     const user = persona.validUser;
 
     await checkoutPage.fillCheckoutInfo(

@@ -15,7 +15,7 @@ End-to-end, API and accessibility test suite for [saucedemo.com](https://www.sau
 | Layer | Location | What it covers |
 | --- | --- | --- |
 | E2E (UI) | `tests/e2e/` | Login, products, cart, checkout — full user flows through the browser |
-| API / network | `tests/api/` | HTTP status codes, redirects, content-type headers, asset loading |
+| Network layer | `tests/network/` | HTTP status codes, redirects, content-type headers, asset loading |
 | Accessibility | `tests/accessibility/` | WCAG 2.1 AA axe scan on login, inventory, cart and checkout pages |
 
 **53 tests** per browser × 3 browsers = **159 total** on every CI run.
@@ -63,9 +63,9 @@ All test data lives in `fixtures/` as typed objects — no magic strings in spec
 
 | File | Purpose |
 | --- | --- |
-| `helpers/authHelper.ts` | `loginAsStandardUser()`, `loginAsProblemUser()` — shorthand login for specs that don't test the login flow |
-| `helpers/apiHelper.ts` | `assertStatus()`, `assertContentType()`, `assertBodyContains()` — HTTP assertion wrappers |
-| `helpers/testUtils.ts` | `calculateSubtotal()`, `sortByPrice*()`, `sortByName*()`, `formatPrice()` |
+| `helpers/auth-helper.ts` | `loginAsStandardUser()`, `loginAsProblemUser()` — shorthand login for specs that don't test the login flow |
+| `helpers/api-helper.ts` | `assertStatus()`, `assertContentType()`, `assertBodyContains()` — HTTP assertion wrappers |
+| `helpers/test-utils.ts` | `calculateSubtotal()`, `sortByPrice*()`, `sortByName*()`, `formatPrice()` |
 
 ### Config
 
@@ -92,9 +92,9 @@ All test data lives in `fixtures/` as typed objects — no magic strings in spec
 │   ├── products.ts
 │   └── personas.ts
 ├── helpers/
-│   ├── authHelper.ts
-│   ├── apiHelper.ts
-│   └── testUtils.ts
+│   ├── auth-helper.ts
+│   ├── api-helper.ts
+│   └── test-utils.ts
 ├── pages/
 │   ├── base-page.ts
 │   ├── login-page.ts
@@ -108,8 +108,8 @@ All test data lives in `fixtures/` as typed objects — no magic strings in spec
 │   │   ├── cart.spec.ts        # 8 tests
 │   │   └── checkout.spec.ts    # 11 tests
 │   ├── api/
-│   │   ├── auth.api.spec.ts
-│   │   └── products.api.spec.ts
+│   │   ├── auth.network.spec.ts
+│   │   └── products.network.spec.ts
 │   └── accessibility/
 │       └── accessibility.spec.ts  # 4 tests — WCAG 2.1 AA via axe-core
 ├── playwright.config.ts
@@ -157,8 +157,8 @@ npx playwright install
 # E2E only
 npx playwright test tests/e2e/
 
-# API only
-npx playwright test tests/api/
+# Network layer only
+npx playwright test tests/network/
 
 # Accessibility only
 npx playwright test tests/accessibility/

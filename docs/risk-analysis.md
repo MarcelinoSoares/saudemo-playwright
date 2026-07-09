@@ -4,11 +4,11 @@
 
 | Risk | Likelihood | Impact | Priority | Mitigation |
 |---|---|---|---|---|
-| Login flow breaks | Medium | High | P1 | Covered by `login.spec.ts` + `auth.api.spec.ts` |
+| Login flow breaks | Medium | High | P1 | Covered by `login.spec.ts` + `auth.network.spec.ts` |
 | Add to cart silently fails | Low | High | P1 | `cart.spec.ts` asserts badge count + cart contents |
 | Checkout form accepts invalid data | Low | Critical | P1 | `checkout.spec.ts` covers all missing-field combinations |
 | Product prices change | Low | Medium | P2 | `products.spec.ts` verifies prices against fixture data |
-| Redirect logic breaks for unauth users | Low | High | P2 | `auth.api.spec.ts` validates redirect behavior |
+| Redirect logic breaks for unauth users | Low | High | P2 | `auth.network.spec.ts` validates redirect behavior |
 | App breaks on Firefox/Safari | Low | Medium | P2 | CI matrix runs chromium + firefox + webkit |
 | Flaky tests on CI | Medium | Medium | P2 | Retry on CI (`retries: 2`), blob report for diagnosis |
 | Slow UI on `performance_glitch_user` | Medium | Low | P3 | `users.ts` includes this persona; test can assert timeout |
@@ -21,7 +21,7 @@
 
 The login flow is the gateway to the entire application. A broken login blocks all other tests.
 
-**Coverage:** `tests/e2e/login.spec.ts`, `tests/api/auth.api.spec.ts`
+**Coverage:** `tests/e2e/login.spec.ts`, `tests/network/auth.network.spec.ts`
 
 **Gaps:** Session expiry, token invalidation (not applicable for this SPA)
 
