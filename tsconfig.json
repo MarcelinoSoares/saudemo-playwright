@@ -8,7 +8,8 @@
   "include": [
     "pages/**/*.ts",
     "tests/**/*.ts",
-    "utils/**/*.ts",
+    "helpers/**/*.ts",
+    "config/**/*.ts",
     "fixtures/**/*.ts",
     "playwright.config.ts"
   ]

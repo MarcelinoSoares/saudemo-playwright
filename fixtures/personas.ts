@@ -1,4 +1,10 @@
-export const persona = {
+export interface CheckoutPersona {
+  firstName: string;
+  lastName: string;
+  zipCode: string;
+}
+
+export const persona: Record<string, CheckoutPersona> = {
   validUser: {
     firstName: 'John',
     lastName: 'Doe',
