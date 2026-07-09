@@ -87,9 +87,19 @@ export class CheckoutPage extends BasePage {
 
   async assertTaxDisplayed(): Promise<void> {
     await expect(this.taxLabel).toBeVisible();
+    await expect(this.taxLabel).toContainText('Tax: $');
   }
 
   async assertTotalDisplayed(): Promise<void> {
     await expect(this.totalLabel).toBeVisible();
+    await expect(this.totalLabel).toContainText('Total: $');
+  }
+
+  async assertTaxAndTotal(subtotal: number): Promise<void> {
+    const TAX_RATE = 0.08;
+    const tax = parseFloat((subtotal * TAX_RATE).toFixed(2));
+    const total = parseFloat((subtotal + tax).toFixed(2));
+    await expect(this.taxLabel).toHaveText(`Tax: $${tax.toFixed(2)}`);
+    await expect(this.totalLabel).toHaveText(`Total: $${total.toFixed(2)}`);
   }
 }

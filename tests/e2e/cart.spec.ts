@@ -47,7 +47,7 @@ test.describe('Cart Page', () => {
   test('should remove item from cart', async () => {
     await cartPage.addItemToCart(products.backpack.name);
     await cartPage.goToCart();
-    await cartPage.removeItem(products.backpack.name);
+    await cartPage.removeItem(products.backpack);
     await cartPage.assertItemNotInCart(products.backpack.name);
   });
 
@@ -63,7 +63,7 @@ test.describe('Cart Page', () => {
     await cartPage.assertCartPage();
 
     for (const product of allProducts) {
-      await cartPage.removeItem(product.name);
+      await cartPage.removeItem(product);
     }
 
     await cartPage.assertCartIsEmpty();
