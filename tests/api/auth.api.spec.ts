@@ -22,12 +22,12 @@ test.describe('Auth - HTTP Layer', () => {
     page,
   }) => {
     await page.goto('/inventory.html');
-    await expect(page).toHaveURL(/^\https:\/\/www\.saucedemo\.com\/?$/);
+    await expect(page).toHaveURL(/^https:\/\/www\.saucedemo\.com\/?$/);
   });
 
   test('unauthenticated access to cart redirects to login', async ({page}) => {
     await page.goto('/cart.html');
-    await expect(page).toHaveURL(/^\https:\/\/www\.saucedemo\.com\/?$/);
+    await expect(page).toHaveURL(/^https:\/\/www\.saucedemo\.com\/?$/);
   });
 
   test('login form is present on the page', async ({page}) => {
