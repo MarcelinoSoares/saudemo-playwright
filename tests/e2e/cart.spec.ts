@@ -1,7 +1,7 @@
 import {test} from '@playwright/test';
 import {CartPage} from '../../pages/cart-page';
 import {InventoryPage} from '../../pages/inventory-page';
-import {loginAsStandardUser} from '../../helpers/authHelper';
+import {loginAsStandardUser} from '../../helpers/auth-helper';
 import {products} from '../../fixtures/products';
 
 test.describe('Cart Page', () => {
@@ -14,17 +14,17 @@ test.describe('Cart Page', () => {
     await loginAsStandardUser(page);
   });
 
-  test('should display cart page', async () => {
+  test('@smoke should display cart page', async () => {
     await cartPage.goToCart();
     await cartPage.assertCartPage();
   });
 
-  test('should add item to cart', async () => {
+  test('@smoke should add item to cart', async () => {
     await cartPage.addItemToCart(products.backpack.name);
     await cartPage.assertCartItemCount(1);
   });
 
-  test('should add multiple items to the cart and verify them', async () => {
+  test('@regression should add multiple items to the cart and verify them', async () => {
     await cartPage.addItemToCart(products.backpack.name);
     await cartPage.addItemToCart(products.bikeLight.name);
 
@@ -35,7 +35,7 @@ test.describe('Cart Page', () => {
     await cartPage.assertItemInCart(products.bikeLight.name);
   });
 
-  test('should display item price in cart', async () => {
+  test('@regression should display item price in cart', async () => {
     await cartPage.addItemToCart(products.backpack.name);
     await cartPage.goToCart();
     await cartPage.assertItemPrice(
@@ -44,14 +44,14 @@ test.describe('Cart Page', () => {
     );
   });
 
-  test('should remove item from cart', async () => {
+  test('@regression should remove item from cart', async () => {
     await cartPage.addItemToCart(products.backpack.name);
     await cartPage.goToCart();
     await cartPage.removeItem(products.backpack);
     await cartPage.assertItemNotInCart(products.backpack.name);
   });
 
-  test('should remove all items from the cart and verify it is empty', async () => {
+  test('@regression should remove all items from the cart and verify it is empty', async () => {
     const allProducts = Object.values(products);
 
     for (const product of allProducts) {
@@ -70,13 +70,13 @@ test.describe('Cart Page', () => {
     await cartPage.assertCartBadgeHidden();
   });
 
-  test('should continue shopping from cart', async () => {
+  test('@regression should continue shopping from cart', async () => {
     await cartPage.goToCart();
     await cartPage.continueShopping();
     await inventoryPage.assertInventoryPage();
   });
 
-  test('should proceed to checkout', async () => {
+  test('@smoke should proceed to checkout', async () => {
     await cartPage.addItemToCart(products.backpack.name);
     await cartPage.goToCart();
     await cartPage.proceedToCheckout();

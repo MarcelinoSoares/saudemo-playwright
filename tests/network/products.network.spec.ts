@@ -1,6 +1,6 @@
 import {test, expect} from '@playwright/test';
 import {products} from '../../fixtures/products';
-import {loginAsStandardUser} from '../../helpers/authHelper';
+import {loginAsStandardUser} from '../../helpers/auth-helper';
 
 test.describe('Products - Network Layer', () => {
   test.beforeEach(async ({page}) => {

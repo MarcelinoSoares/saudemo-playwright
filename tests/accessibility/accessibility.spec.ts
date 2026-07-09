@@ -1,10 +1,10 @@
 import {test, expect} from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
-import {loginAsStandardUser} from '../../helpers/authHelper';
+import {loginAsStandardUser} from '../../helpers/auth-helper';
 import {urls} from '../../config/urls';
 
 test.describe('Accessibility — WCAG 2.1 AA', () => {
-  test('login page has no critical violations', async ({page}) => {
+  test('login page has no WCAG A/AA violations', async ({page}) => {
     await page.goto(urls.login);
 
     const results = await new AxeBuilder({page})
@@ -14,7 +14,9 @@ test.describe('Accessibility — WCAG 2.1 AA', () => {
     expect(results.violations).toEqual([]);
   });
 
-  test('inventory page has no critical violations', async ({page}) => {
+  test('inventory page has no WCAG A/AA violations except known select-name issue', async ({
+    page,
+  }) => {
     await loginAsStandardUser(page);
 
     // Known app defect: the sort <select> has no accessible label (select-name / WCAG 4.1.2).
@@ -28,7 +30,7 @@ test.describe('Accessibility — WCAG 2.1 AA', () => {
     expect(results.violations).toEqual([]);
   });
 
-  test('cart page has no critical violations', async ({page}) => {
+  test('cart page has no WCAG A/AA violations', async ({page}) => {
     await loginAsStandardUser(page);
     await page.goto(urls.cart);
 
@@ -39,7 +41,7 @@ test.describe('Accessibility — WCAG 2.1 AA', () => {
     expect(results.violations).toEqual([]);
   });
 
-  test('checkout step 1 has no critical violations', async ({page}) => {
+  test('checkout step 1 has no WCAG A/AA violations', async ({page}) => {
     await loginAsStandardUser(page);
     await page.goto(urls.checkoutStep1);
 

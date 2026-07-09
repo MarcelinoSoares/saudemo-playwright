@@ -14,7 +14,7 @@ test.describe('Login Page', () => {
     await loginPage.assertLoginPage();
   });
 
-  test('should login successfully with valid credentials', async () => {
+  test('@smoke should login successfully with valid credentials', async () => {
     await loginPage.login(
       users.standardUser.username,
       users.standardUser.password,
@@ -30,7 +30,7 @@ test.describe('Login Page', () => {
     await loginPage.assertLoginSuccess();
   });
 
-  test('should display error for invalid credentials', async () => {
+  test('@regression should display error for invalid credentials', async () => {
     await loginPage.login(
       users.invalidUser.username,
       users.invalidUser.password,
@@ -40,7 +40,7 @@ test.describe('Login Page', () => {
     );
   });
 
-  test('should display error for missing password', async () => {
+  test('@regression should display error for missing password', async () => {
     await loginPage.login(
       users.withoutPasswordUser.username,
       users.withoutPasswordUser.password,
@@ -48,7 +48,7 @@ test.describe('Login Page', () => {
     await loginPage.assertLoginError('Epic sadface: Password is required');
   });
 
-  test('should display error for missing username', async () => {
+  test('@regression should display error for missing username', async () => {
     await loginPage.login(
       users.withoutUsernameUser.username,
       users.withoutUsernameUser.password,
@@ -56,7 +56,7 @@ test.describe('Login Page', () => {
     await loginPage.assertLoginError('Epic sadface: Username is required');
   });
 
-  test('should display error for locked out user', async () => {
+  test('@regression should display error for locked out user', async () => {
     await loginPage.login(
       users.lockedOutUser.username,
       users.lockedOutUser.password,
@@ -66,7 +66,7 @@ test.describe('Login Page', () => {
     );
   });
 
-  test('should dismiss error message', async () => {
+  test('@regression should dismiss error message', async () => {
     await loginPage.login(
       users.invalidUser.username,
       users.invalidUser.password,

@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "playwright test",
+    "test:ci": "npm run validate && playwright test",
     "test:smoke": "playwright test --grep @smoke",
     "test:regression": "playwright test --grep @regression",
     "test:chromium": "playwright test --project=chromium",
@@ -16,9 +17,8 @@
     "clean": "gts clean",
     "compile": "tsc",
     "fix": "gts fix",
-    "prepare": "npm run compile",
-    "pretest": "npm run compile",
-    "posttest": "npm run check"
+    "validate": "npm run compile && npm run check",
+    "prepare": "npm run compile"
   },
   "keywords": [
     "playwright",

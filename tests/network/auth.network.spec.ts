@@ -1,23 +1,27 @@
 import {test, expect} from '@playwright/test';
+import {
+  getPage,
+  assertStatus,
+  assertContentType,
+  assertBodyContains,
+} from '../../helpers/api-helper';
 import {LoginPage} from '../../pages/login-page';
 import {users} from '../../fixtures/users';
 
 test.describe('Auth - HTTP Layer', () => {
   test('login page returns 200', async ({request}) => {
-    const response = await request.get('/');
-    expect(response.status()).toBe(200);
+    const response = await getPage(request, '/');
+    await assertStatus(response, 200);
   });
 
   test('login page returns HTML content', async ({request}) => {
-    const response = await request.get('/');
-    const contentType = response.headers()['content-type'];
-    expect(contentType).toContain('text/html');
+    const response = await getPage(request, '/');
+    await assertContentType(response, 'text/html');
   });
 
   test('login page contains app title', async ({request}) => {
-    const response = await request.get('/');
-    const body = await response.text();
-    expect(body).toContain('Swag Labs');
+    const response = await getPage(request, '/');
+    await assertBodyContains(response, 'Swag Labs');
   });
 
   test('unauthenticated access to inventory redirects to login', async ({

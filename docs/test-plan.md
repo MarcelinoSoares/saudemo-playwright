@@ -39,7 +39,7 @@
 | Type | Directory | Runner |
 |---|---|---|
 | E2E (UI) | `tests/e2e/` | Playwright browser |
-| API / network | `tests/api/` | Playwright request fixture |
+| API / network | `tests/network/` | Playwright request fixture |
 | Accessibility | `tests/accessibility/` | Playwright + axe-core |
 
 ---
@@ -86,14 +86,14 @@
 | Missing zip | first / last / (empty) | "Postal Code is required" error |
 | Complete order | All fields valid | Order confirmation page |
 
-### 4.5 API / Network (`tests/api/`)
+### 4.5 API / Network (`tests/network/`)
 
 | Test Case | File | Check |
 |---|---|---|
-| Login page availability | `auth.api.spec.ts` | HTTP 200 |
-| Unauthenticated redirect | `auth.api.spec.ts` | `/inventory.html` → redirect |
-| Inventory page content | `products.api.spec.ts` | Body contains product markup |
-| Asset loading | `products.api.spec.ts` | Images return non-empty response |
+| Login page availability | `auth.network.spec.ts` | HTTP 200 |
+| Unauthenticated redirect | `auth.network.spec.ts` | `/inventory.html` → redirect |
+| Inventory page content | `products.network.spec.ts` | Body contains product markup |
+| Asset loading | `products.network.spec.ts` | Images return non-empty response |
 
 ### 4.6 Accessibility (`tests/accessibility/accessibility.spec.ts`)
 
@@ -170,7 +170,7 @@ Key risks:
 
 | Risk | Mitigation |
 |---|---|
-| Login flow breaks | `login.spec.ts` + `auth.api.spec.ts` are P1 and run first |
+| Login flow breaks | `login.spec.ts` + `auth.network.spec.ts` are P1 and run first |
 | Flaky tests on CI | `retries: 2` on CI; blob report for diagnosis |
 | App breaks on Firefox/Safari | CI matrix covers all 3 browsers |
 

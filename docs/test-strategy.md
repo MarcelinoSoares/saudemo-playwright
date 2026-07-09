@@ -25,7 +25,7 @@ Validate the end-to-end purchase flow of a web e-commerce application using Play
         /  \
        / E2E \        ← UI tests via Playwright (tests/e2e/)
       /--------\
-     /  API     \     ← HTTP/network layer (tests/api/)
+     /  Network  \     ← HTTP/network layer (tests/network/)
     /------------\
    /   Unit (TBD) \   ← Pure logic functions (helpers/)
   /-----------------\
@@ -44,12 +44,12 @@ UI-level tests that simulate real user flows through the browser. Each spec corr
 - `cart.spec.ts` — add, remove, verify cart contents
 - `checkout.spec.ts` — form validation, order summary, order completion
 
-### API / Network Tests (`tests/api/`)
+### Network Tests (`tests/network/`)
 
 Tests that validate HTTP behavior without full browser rendering:
 
-- `auth.api.spec.ts` — page availability, redirect behavior, response content
-- `products.api.spec.ts` — inventory endpoints, asset loading, network interception
+- `auth.network.spec.ts` — page availability, redirect behavior, response content
+- `products.network.spec.ts` — inventory endpoints, asset loading, network interception
 
 ---
 
