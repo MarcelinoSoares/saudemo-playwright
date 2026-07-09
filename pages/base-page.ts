@@ -8,7 +8,7 @@ export class BasePage {
   }
 
   async assertUrlContains(urlSubstring: string): Promise<void> {
-    await expect(this.page).toHaveURL(new RegExp(urlSubstring));
+    await expect(this.page).toHaveURL(url => url.href.includes(urlSubstring));
   }
 
   async getAllTextContents(selector: string): Promise<string[]> {
