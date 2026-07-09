@@ -11,9 +11,9 @@ test.describe('Products - Network Layer', () => {
     await page.waitForURL(/inventory/);
   });
 
-  test('inventory page returns 200 when authenticated', async ({request}) => {
-    const response = await request.get('/inventory.html');
-    expect(response.status()).toBe(200);
+  test('inventory page is accessible when authenticated', async ({page}) => {
+    await expect(page).toHaveURL(/inventory\.html/);
+    await expect(page.locator('.inventory_list')).toBeVisible();
   });
 
   test('all product images load successfully', async ({page}) => {
@@ -32,9 +32,10 @@ test.describe('Products - Network Layer', () => {
     await expect(items).toHaveCount(Object.keys(products).length);
   });
 
-  test('network request to cart endpoint returns 200', async ({request}) => {
-    const response = await request.get('/cart.html');
-    expect(response.status()).toBe(200);
+  test('cart page is reachable via navigation', async ({page}) => {
+    await page.locator('.shopping_cart_link').click();
+    await expect(page).toHaveURL(/cart\.html/);
+    await expect(page.locator('.cart_list')).toBeVisible();
   });
 
   test('product detail page loads via direct URL', async ({page}) => {
