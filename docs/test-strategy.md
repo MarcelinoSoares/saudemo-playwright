@@ -88,7 +88,7 @@ Managed via `config/environments.ts`. Set `TEST_ENV=staging` to run against stag
 Tests run on every `push` / `pull_request` to `main` via GitHub Actions:
 
 1. **Validation** — lint + type check
-2. **Test** — parallel execution across 3 shards (chromium, firefox, webkit)
+2. **Test** — 3 parallel shards, each running the full browser matrix (chromium, firefox, webkit)
 3. **Merge reports** — combine shard results
 4. **Deploy** — publish HTML report to GitHub Pages
 

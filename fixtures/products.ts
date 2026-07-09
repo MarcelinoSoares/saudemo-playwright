@@ -70,10 +70,26 @@ export const sortExpectations = {
   nameAtoZ: {
     first: products.backpack.name,
     last: products.redTShirt.name,
+    all: [
+      products.backpack.name,
+      products.bikeLight.name,
+      products.boltTShirt.name,
+      products.fleeceJacket.name,
+      products.onesie.name,
+      products.redTShirt.name,
+    ],
   },
   nameZtoA: {
     first: products.redTShirt.name,
     last: products.backpack.name,
+    all: [
+      products.redTShirt.name,
+      products.onesie.name,
+      products.fleeceJacket.name,
+      products.boltTShirt.name,
+      products.bikeLight.name,
+      products.backpack.name,
+    ],
   },
   priceLowToHigh: {
     firstPrice: products.onesie.price,

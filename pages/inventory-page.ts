@@ -77,6 +77,10 @@ export class InventoryPage extends BasePage {
     await this.backToProductsButton.click();
   }
 
+  async verifyProductNamesOrder(expectedNames: string[]): Promise<void> {
+    await expect(this.itemNames).toHaveText(expectedNames);
+  }
+
   async verifyItemDescriptions(
     expectedItems: {name: string; description: string}[],
   ): Promise<void> {

@@ -14,5 +14,12 @@ export const environments: Record<string, Environment> = {
   },
 };
 
-export const currentEnvironment: Environment =
-  environments[process.env.TEST_ENV ?? 'production'];
+const envName = process.env.TEST_ENV ?? 'production';
+
+if (!environments[envName]) {
+  throw new Error(
+    `Invalid TEST_ENV: "${envName}". Valid values: ${Object.keys(environments).join(', ')}`,
+  );
+}
+
+export const currentEnvironment: Environment = environments[envName];

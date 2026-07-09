@@ -1,14 +1,10 @@
-import {Page, Locator, expect} from '@playwright/test';
+import {Page, expect} from '@playwright/test';
 
 export class BasePage {
   constructor(protected page: Page) {}
 
   async navigate(url: string): Promise<void> {
     await this.page.goto(url);
-  }
-
-  getLocator(selector: string): Locator {
-    return this.page.locator(selector);
   }
 
   async assertUrlContains(urlSubstring: string): Promise<void> {

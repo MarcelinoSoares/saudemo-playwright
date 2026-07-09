@@ -25,14 +25,12 @@ test.describe('Products Page', () => {
 
   test('should sort products A to Z', async () => {
     await inventoryPage.selectProductSortOption('Name (A to Z)');
-    await inventoryPage.verifyFirstItemInList(sortExpectations.nameAtoZ.first);
-    await inventoryPage.verifyLastItemInList(sortExpectations.nameAtoZ.last);
+    await inventoryPage.verifyProductNamesOrder(sortExpectations.nameAtoZ.all);
   });
 
   test('should sort products Z to A', async () => {
     await inventoryPage.selectProductSortOption('Name (Z to A)');
-    await inventoryPage.verifyFirstItemInList(sortExpectations.nameZtoA.first);
-    await inventoryPage.verifyLastItemInList(sortExpectations.nameZtoA.last);
+    await inventoryPage.verifyProductNamesOrder(sortExpectations.nameZtoA.all);
   });
 
   test('should sort products by price low to high', async () => {
