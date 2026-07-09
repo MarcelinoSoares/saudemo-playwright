@@ -107,7 +107,7 @@ All test data lives in `fixtures/` as typed objects — no magic strings in spec
 │   │   ├── products.spec.ts    # 9 tests
 │   │   ├── cart.spec.ts        # 8 tests
 │   │   └── checkout.spec.ts    # 11 tests
-│   ├── api/
+│   ├── network/
 │   │   ├── auth.network.spec.ts
 │   │   └── products.network.spec.ts
 │   └── accessibility/
@@ -139,7 +139,8 @@ npx playwright install
 
 | Command | What it does |
 | --- | --- |
-| `npm test` | Compile + run all tests headless (runs lint check after) |
+| `npm test` | Run all tests headless |
+| `npm run test:ci` | Compile, lint and run all tests (used in CI) |
 | `npx playwright test tests/e2e/login.spec.ts` | Run a single spec |
 | `npx playwright test -g "should login"` | Run tests matching a name pattern |
 | `npx playwright test --project=chromium` | Run on a single browser |
