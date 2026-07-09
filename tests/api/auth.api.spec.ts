@@ -1,4 +1,6 @@
 import {test, expect} from '@playwright/test';
+import {LoginPage} from '../../pages/login-page';
+import {users} from '../../fixtures/users';
 
 test.describe('Auth - HTTP Layer', () => {
   test('login page returns 200', async ({request}) => {
@@ -31,18 +33,17 @@ test.describe('Auth - HTTP Layer', () => {
   });
 
   test('login form is present on the page', async ({page}) => {
-    await page.goto('/');
-    await expect(page.locator('#user-name')).toBeVisible();
-    await expect(page.locator('#password')).toBeVisible();
-    await expect(page.locator('#login-button')).toBeVisible();
+    const loginPage = new LoginPage(page);
+    await loginPage.navigate();
+    await expect(loginPage.usernameInput).toBeVisible();
+    await expect(loginPage.passwordInput).toBeVisible();
+    await expect(loginPage.loginButton).toBeVisible();
   });
 
   test('successful login navigates to inventory', async ({page}) => {
-    await page.goto('/');
-    await page.fill('#user-name', 'standard_user');
-    await page.fill('#password', 'secret_sauce');
-    await page.click('#login-button');
-    await expect(page).toHaveURL(/inventory/);
-    expect(page.url()).toContain('inventory');
+    const loginPage = new LoginPage(page);
+    await loginPage.navigate();
+    await loginPage.login(users.standardUser.username, users.standardUser.password);
+    await loginPage.assertLoginSuccess();
   });
 });

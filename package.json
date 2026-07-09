@@ -1,7 +1,7 @@
 {
-  "name": "sauce-playwright",
+  "name": "saucedemo-playwright",
   "version": "1.0.0",
-  "description": "",
+  "description": "Production-grade Playwright test suite for SauceDemo covering E2E, network and accessibility testing.",
   "main": "index.js",
   "scripts": {
     "test": "playwright test",
@@ -17,9 +17,16 @@
     "pretest": "npm run compile",
     "posttest": "npm run check"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "playwright",
+    "typescript",
+    "qa-automation",
+    "e2e-testing",
+    "accessibility-testing",
+    "sdet"
+  ],
+  "author": "Marcelino Soares",
+  "license": "MIT",
   "type": "commonjs",
   "devDependencies": {
     "@axe-core/playwright": "^4.12.1",

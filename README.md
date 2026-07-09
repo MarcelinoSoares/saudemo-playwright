@@ -143,7 +143,7 @@ npx playwright install
 | `npx playwright test tests/e2e/login.spec.ts` | Run a single spec |
 | `npx playwright test -g "should login"` | Run tests matching a name pattern |
 | `npx playwright test --project=chromium` | Run on a single browser |
-| `npm run test:headless` | Run in headed mode (visible browser) |
+| `npm run test:headed` | Run tests with visible browser |
 | `npm run test:ui` | Open Playwright interactive UI |
 | `npx playwright test --debug` | Step-through debugger |
 | `npm run test:report` | Open last HTML report |

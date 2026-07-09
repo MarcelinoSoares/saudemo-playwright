@@ -1,14 +1,10 @@
 import {test, expect} from '@playwright/test';
-import {users} from '../../fixtures/users';
 import {products} from '../../fixtures/products';
+import {loginAsStandardUser} from '../../helpers/authHelper';
 
 test.describe('Products - Network Layer', () => {
   test.beforeEach(async ({page}) => {
-    await page.goto('/');
-    await page.fill('#user-name', users.standardUser.username);
-    await page.fill('#password', users.standardUser.password);
-    await page.click('#login-button');
-    await page.waitForURL(/inventory/);
+    await loginAsStandardUser(page);
   });
 
   test('inventory page is accessible when authenticated', async ({page}) => {
