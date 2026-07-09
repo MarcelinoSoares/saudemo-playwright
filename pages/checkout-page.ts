@@ -48,7 +48,7 @@ export class CheckoutPage extends BasePage {
   async fillCheckoutInfo(
     firstName: string,
     lastName: string,
-    zip: string
+    zip: string,
   ): Promise<void> {
     await this.firstNameInput.fill(firstName);
     await this.lastNameInput.fill(lastName);
@@ -67,7 +67,7 @@ export class CheckoutPage extends BasePage {
   async assertOrderConfirmation(): Promise<void> {
     await expect(this.completeHeader).toHaveText('Thank you for your order!');
     await expect(this.completeText).toHaveText(
-      'Your order has been dispatched, and will arrive just as fast as the pony can get there!'
+      'Your order has been dispatched, and will arrive just as fast as the pony can get there!',
     );
   }
 
@@ -78,7 +78,7 @@ export class CheckoutPage extends BasePage {
   async assertOrderSummary(
     itemName: string,
     itemPrice: number,
-    itemQuantity: string
+    itemQuantity: string,
   ): Promise<void> {
     await expect(this.itemName).toHaveText(itemName);
     await expect(this.itemPrice).toHaveText(`$${itemPrice.toFixed(2)}`);

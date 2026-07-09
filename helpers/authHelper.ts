@@ -15,11 +15,7 @@ export async function loginAs(
 }
 
 export async function loginAsStandardUser(page: Page): Promise<void> {
-  await loginAs(
-    page,
-    users.standardUser.username,
-    users.standardUser.password,
-  );
+  await loginAs(page, users.standardUser.username, users.standardUser.password);
 }
 
 export async function loginAsProblemUser(page: Page): Promise<void> {

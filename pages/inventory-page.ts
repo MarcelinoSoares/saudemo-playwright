@@ -53,7 +53,7 @@ export class InventoryPage extends BasePage {
 
   async searchItemExistsInInventory(itemName: string): Promise<void> {
     await expect(
-      this.page.locator(`.inventory_item_name:has-text("${itemName}")`)
+      this.page.locator(`.inventory_item_name:has-text("${itemName}")`),
     ).toBeVisible();
   }
 
@@ -66,7 +66,7 @@ export class InventoryPage extends BasePage {
   async verifyItemDetails(
     itemName: string,
     itemDescription: string,
-    itemPrice: number
+    itemPrice: number,
   ): Promise<void> {
     await expect(this.detailName).toHaveText(itemName);
     await expect(this.detailDescription).toHaveText(itemDescription);
@@ -78,23 +78,23 @@ export class InventoryPage extends BasePage {
   }
 
   async verifyItemDescriptions(
-    expectedItems: {name: string; description: string}[]
+    expectedItems: {name: string; description: string}[],
   ): Promise<void> {
     const itemNames = await this.itemNames.allTextContents();
     const itemDescriptions = await this.itemDescriptions.allTextContents();
     expect(itemNames).toEqual(expectedItems.map(item => item.name));
     expect(itemDescriptions).toEqual(
-      expectedItems.map(item => item.description)
+      expectedItems.map(item => item.description),
     );
   }
 
   async verifyItemPrices(
-    expectedItems: {name: string; price: number}[]
+    expectedItems: {name: string; price: number}[],
   ): Promise<void> {
     const itemNames = await this.itemNames.allTextContents();
     const itemPrices = await this.itemPrices.allTextContents();
     const formattedPrices = itemPrices.map(price =>
-      parseFloat(price.replace('$', ''))
+      parseFloat(price.replace('$', '')),
     );
     expect(itemNames).toEqual(expectedItems.map(item => item.name));
     expect(formattedPrices).toEqual(expectedItems.map(item => item.price));

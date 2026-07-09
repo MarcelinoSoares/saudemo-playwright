@@ -1,7 +1,11 @@
 import {test} from '@playwright/test';
 import {InventoryPage} from '../../pages/inventory-page';
 import {loginAsStandardUser} from '../../helpers/authHelper';
-import {products, sortExpectations, TOTAL_PRODUCT_COUNT} from '../../fixtures/products';
+import {
+  products,
+  sortExpectations,
+  TOTAL_PRODUCT_COUNT,
+} from '../../fixtures/products';
 
 test.describe('Products Page', () => {
   let inventoryPage: InventoryPage;
@@ -33,12 +37,16 @@ test.describe('Products Page', () => {
 
   test('should sort products by price low to high', async () => {
     await inventoryPage.selectProductSortOption('Price (low to high)');
-    await inventoryPage.verifyFirstItemPrice(sortExpectations.priceLowToHigh.firstPrice);
+    await inventoryPage.verifyFirstItemPrice(
+      sortExpectations.priceLowToHigh.firstPrice,
+    );
   });
 
   test('should sort products by price high to low', async () => {
     await inventoryPage.selectProductSortOption('Price (high to low)');
-    await inventoryPage.verifyFirstItemPrice(sortExpectations.priceHighToLow.firstPrice);
+    await inventoryPage.verifyFirstItemPrice(
+      sortExpectations.priceHighToLow.firstPrice,
+    );
   });
 
   test('should display product details correctly', async () => {
@@ -46,7 +54,11 @@ test.describe('Products Page', () => {
 
     await inventoryPage.searchItemExistsInInventory(item.name);
     await inventoryPage.clickOnInventoryItem(item.name);
-    await inventoryPage.verifyItemDetails(item.name, item.description, item.price);
+    await inventoryPage.verifyItemDetails(
+      item.name,
+      item.description,
+      item.price,
+    );
     await inventoryPage.backToProducts();
     await inventoryPage.assertInventoryPage();
   });

@@ -50,20 +50,20 @@ export class CartPage extends BasePage {
 
   async assertItemInCart(itemName: string): Promise<void> {
     await expect(
-      this.page.locator(`.inventory_item_name:has-text("${itemName}")`)
+      this.page.locator(`.inventory_item_name:has-text("${itemName}")`),
     ).toBeVisible();
   }
 
   async assertItemNotInCart(itemName: string): Promise<void> {
     await expect(
-      this.page.locator(`.inventory_item_name:has-text("${itemName}")`)
+      this.page.locator(`.inventory_item_name:has-text("${itemName}")`),
     ).not.toBeVisible();
   }
 
   async assertItemPrice(itemName: string, price: number): Promise<void> {
     const cartItem = this.page.locator(`.cart_item:has-text("${itemName}")`);
     await expect(cartItem.locator('.inventory_item_price')).toHaveText(
-      `$${price.toFixed(2)}`
+      `$${price.toFixed(2)}`,
     );
   }
 
